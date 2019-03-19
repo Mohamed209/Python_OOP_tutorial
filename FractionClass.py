@@ -1,3 +1,4 @@
+from utility_functions import gcd
 class Fraction:
     def __init__(self,top,bottom):
         self.num=top
@@ -6,23 +7,11 @@ class Fraction:
         print(self.num,"/",self.dom)
     # implement function to add two fractions
     def add(self,otherfraction):
-        #a/b+c/d=ad/bd+cb/bd=ad+cbbd
-        newnum = self.num * otherfraction.dom + self.dom * otherfraction.num
-        newden = self.dom * otherfraction.dom
-        # return new object with newum and newden
-        return Fraction(newnum,newden)
-    # function to reduce fraction if num is devided by dom
-    '''def reduce(self):
-        if(self.num>self.dom and self.num%self.dom==0):
-            self.num=int(self.num/self.dom)
-            self.dom=1
-            return self.num
-        elif (self.num==self.dom):
-            self.num=1
-            self.dom=1
-            return self.num
-        else :pass
-    '''
+        newnum = self.num * otherfraction.dom+ self.dom * otherfraction.num
+        newdom = self.dom * otherfraction.dom
+        common = gcd(newnum, newdom)
+        # return a new object
+        return Fraction(newnum // common, newdom // common)
 f1=Fraction(1,2)
 f2=Fraction(4,2)
 f3=f1.add(f2)
